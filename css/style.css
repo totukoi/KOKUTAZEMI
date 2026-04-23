@@ -79,6 +79,7 @@ body.scrolled{background:#f5f5f5;color:#000;}
   
   .content{
     padding:120px 15px 0 15px;
+    padding-left:5px;
   }
 }
 
