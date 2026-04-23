@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INFORMATION</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<style>
+body{
+  margin:0;
+  background:#111;
+  color:#fff;
+  font-family:sans-serif;
+}
+
+.transition{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:9999;
+  pointer-events:none;
+}
+
+a{
+  color:#888;
+  text-decoration:none;
+}
+
+a:hover{
+  color:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="transition"></div>
+
+<h1>INFORMATION</h1>
+<p>お知らせページ</p>
+
+<a href="../index.html">TOPへ戻る</a>
+
+<script>
+window.onload = () => {
+  gsap.to(".transition", {opacity:0, duration:0.6});
+};
+
+document.querySelectorAll("a[href]").forEach(link=>{
+  link.onclick = e => {
+    const url = link.getAttribute("href");
+    if(url.startsWith("http")) return;
+
+    e.preventDefault();
+
+    gsap.to(".transition", {
+      opacity:1,
+      duration:0.4,
+      onComplete: ()=>{
+        location.href = url;
+      }
+    });
+  };
+});
+</script>
+
+</body>
+</html>
