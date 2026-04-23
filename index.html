@@ -24,7 +24,7 @@ body.scrolled{
   color:#000;
 }
 
-/* ■ ナビ固定 */
+/* ■ ナビ固定（修正版） */
 .nav{
   position:fixed;
   top:0;
@@ -40,24 +40,19 @@ body.scrolled{
   backdrop-filter:blur(6px);
 }
 
+/* ■ メニュー横並び */
 .menu{
   display:flex;
   gap:15px;
 }
 
+/* ■ リンク共通 */
 .nav a{
   color:inherit;
   text-decoration:none;
-}
-  
-/* ■ ナビ文字 */
-.nav a{
-  color:inherit;
-  text-decoration:none;
-  margin-left:50px;
 }
 
-/* ■ セクション（スクロール用の高さ） */
+/* ■ メイン */
 .hero{
   height:150vh;
   display:flex;
@@ -81,36 +76,29 @@ body.scrolled{
 
 <div class="transition"></div>
 
-<!-- ナビ -->
+<!-- ■ ナビ -->
 <div class="nav">
   <a href="./index.html">KOKUTAZEMI</a>
-  <div>
+
+  <div class="menu">
     <a href="./information/">INFO</a>
     <a href="./about/">ABOUT</a>
     <a href="./contact/">CONTACT</a>
   </div>
 </div>
 
-<!-- メイン -->
+<!-- ■ メイン -->
 <section class="hero">
   <h1>SCROLL DOWN</h1>
 </section>
 
-<!-- ダミー -->
+<!-- ■ ダミースクロール -->
 <section style="height:200vh;"></section>
 
 <script>
-/* ■ スクロールで背景切替 */
+/* ■ スクロールで背景変更 */
 window.addEventListener("scroll", () => {
-  const body = document.body;
-
-  if(window.scrollY > 100){
-    body.classList.add("scrolled");
-    body.classList.remove("top");
-  } else {
-    body.classList.add("top");
-    body.classList.remove("scrolled");
-  }
+  document.body.classList.toggle("scrolled", window.scrollY > 100);
 });
 
 /* ■ 初期状態 */
