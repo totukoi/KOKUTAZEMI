@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOKUTAZEMI</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<style>
+body{margin:0;background:#000;color:#fff;font-family:sans-serif;}
+
+.nav{
+  position:fixed;top:20px;width:100%;
+  display:flex;justify-content:space-between;
+  padding:0 40px;
+}
+
+.menu a{
+  color:#888;margin-left:20px;text-decoration:none;
+}
+.menu a:hover{color:#fff;}
+
+.hero{
+  height:100vh;
+  display:flex;justify-content:center;align-items:center;
+  flex-direction:column;
+}
+
+.transition{
+  position:fixed;inset:0;background:#000;
+  z-index:9999;
+  pointer-events:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="transition"></div>
+
+<div class="nav">
+  <a href="./index.html">KOKUTAZEMI</a>
+  <div class="menu">
+    <a href="./information/">INFORMATION</a>
+    <a href="./about/">ABOUT</a>
+    <a href="./contact/">CONTACT</a>
+  </div>
+</div>
+
+<section class="hero">
+  <h1>WELCOME</h1>
+</section>
+
+<script>
+window.onload=()=>gsap.to(".transition",{opacity:0,duration:0.6});
+
+document.querySelectorAll("a[href]").forEach(link=>{
+  link.onclick=e=>{
+    const url=link.getAttribute("href");
+    if(url.startsWith("http"))return;
+    e.preventDefault();
+    gsap.to(".transition",{opacity:1,duration:0.4,onComplete:()=>{
+      location.href=url;
+    }});
+  }
+});
+</script>
+
+</body>
+</html>
