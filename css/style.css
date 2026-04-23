@@ -76,6 +76,10 @@ body.scrolled{background:#f5f5f5;color:#000;}
   }
 
   .menu.active{display:flex;}
+  
+  .content{
+    padding-left:10;
+  }
 }
 
 /* ■ フェード */
