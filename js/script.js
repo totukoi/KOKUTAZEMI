@@ -1,3 +1,4 @@
+/* メニュー */
 function toggleMenu(){
   document.getElementById("menu").classList.toggle("active");
 }
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("transition").style.opacity = "0";
 });
 
-/* 背景変更 */
+/* 背景切替 */
 function changeBg(url){
   nextBg.style.backgroundImage = `url(${url})`;
   nextBg.classList.add("active");
@@ -38,6 +39,15 @@ function changeBg(url){
 
 /* スクロール */
 window.addEventListener("scroll", () => {
+
+  const nav = document.getElementById("nav");
+
+  /* ナビ色変化 */
+  if(window.scrollY > 50){
+    nav.classList.add("scrolled");
+  }else{
+    nav.classList.remove("scrolled");
+  }
 
   let closest = null;
   let min = Infinity;
@@ -69,4 +79,20 @@ window.addEventListener("scroll", () => {
       changeBg(newBg);
     }
   }
+});
+
+/* ページ遷移 */
+document.querySelectorAll("a[href]").forEach(link => {
+  link.addEventListener("click", function(e){
+    const url = this.getAttribute("href");
+    if(url.startsWith("http")) return;
+
+    e.preventDefault();
+
+    document.getElementById("transition").style.opacity = "1";
+
+    setTimeout(() => {
+      window.location.href = url;
+    }, 400);
+  });
 });
