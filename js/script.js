@@ -1,27 +1,41 @@
-/* メニュー */
 function toggleMenu(){
   document.getElementById("menu").classList.toggle("active");
 }
 
 const sections = document.querySelectorAll(".section");
-const bg = document.getElementById("bg");
 
+const bg1 = document.getElementById("bg1");
+const bg2 = document.getElementById("bg2");
+
+let currentBg = bg1;
+let nextBg = bg2;
 let current = "";
 
 /* 初期 */
 window.addEventListener("load", () => {
-  if(sections.length > 0){
-    const first = sections[0];
-    const firstBg = first.dataset.bg;
+  const first = sections[0];
+  const firstBg = first.dataset.bg;
 
-    bg.style.backgroundImage = `url(${firstBg})`;
-    current = firstBg;
+  currentBg.style.backgroundImage = `url(${firstBg})`;
+  currentBg.classList.add("active");
+  current = firstBg;
 
-    first.classList.add("active"); // 最初の文字表示
-  }
+  first.classList.add("active");
 
   document.getElementById("transition").style.opacity = "0";
 });
+
+/* 背景変更 */
+function changeBg(url){
+  nextBg.style.backgroundImage = `url(${url})`;
+  nextBg.classList.add("active");
+
+  currentBg.classList.remove("active");
+
+  let temp = currentBg;
+  currentBg = nextBg;
+  nextBg = temp;
+}
 
 /* スクロール */
 window.addEventListener("scroll", () => {
@@ -42,7 +56,7 @@ window.addEventListener("scroll", () => {
     }
   });
 
-  /* active切り替え（文字表示制御） */
+  /* 文字制御 */
   sections.forEach(section => {
     section.classList.remove("active");
   });
@@ -54,13 +68,7 @@ window.addEventListener("scroll", () => {
 
     if(current !== newBg){
       current = newBg;
-
-      bg.style.opacity = "0";
-
-      setTimeout(() => {
-        bg.style.backgroundImage = `url(${newBg})`;
-        bg.style.opacity = "1";
-      }, 400);
+      changeBg(newBg);
     }
   }
 });
@@ -72,6 +80,7 @@ document.querySelectorAll("a[href]").forEach(link => {
     if(url.startsWith("http")) return;
 
     e.preventDefault();
+
     document.getElementById("transition").style.opacity = "1";
 
     setTimeout(() => {
