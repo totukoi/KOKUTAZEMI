@@ -70,6 +70,11 @@ body{
 
 /* ■ スマホ */
 @media (max-width:768px){
+  .section{
+    padding-left:15px;
+    font-size:28px;
+  }
+}
 
   .hamburger{display:block;}
 
