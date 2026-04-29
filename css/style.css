@@ -2,7 +2,7 @@ body{
   margin:0;
   font-family:sans-serif;
   color:#fff;
-  overflow-x:hidden; /* ←横はみ出し防止 */
+  overflow-x:hidden; /* 横はみ出し防止 */
 }
 
 /* 背景 */
@@ -21,6 +21,47 @@ body{
   opacity:1;
 }
 
+/* ナビ */
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 20px;
+  z-index:10000;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(6px);
+}
+
+.nav > a{
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-decoration:none;
+  color:#fff;
+}
+
+/* メニュー */
+.menu{
+  display:flex;
+  gap:20px;
+}
+
+.menu a{
+  text-decoration:none;
+  color:#fff;
+}
+
+/* ハンバーガー */
+.hamburger{
+  display:none;
+  font-size:26px;
+  cursor:pointer;
+}
+
 /* セクション */
 .section{
   min-height:100vh;
@@ -29,7 +70,7 @@ body{
   align-items:flex-start;
 
   padding:0 70px;
-  box-sizing:border-box; /* ←重要 */
+  box-sizing:border-box;
 }
 
 /* テキスト */
@@ -38,16 +79,58 @@ body{
   margin:0;
   margin-top:15vh;
 
-  max-width:100%; /* ←修正 */
-  word-break:break-word; /* ←追加 */
+  max-width:100%;
+  word-break:break-word;
 
   opacity:0;
   transform:translateY(60px);
-  transition:0.8s;
+  transition:opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* 表示 */
+/* 表示状態 */
 .section.active h1{
   opacity:1;
   transform:translateY(0);
+}
+
+/* スマホ */
+@media (max-width:768px){
+
+  .section{
+    padding:0 15px;
+  }
+
+  .section h1{
+    font-size:28px;
+    margin-top:18vh;
+  }
+
+  .hamburger{
+    display:block;
+  }
+
+  .menu{
+    display:none;
+    flex-direction:column;
+    position:absolute;
+    top:60px;
+    right:20px;
+    background:#000;
+    padding:10px;
+  }
+
+  .menu.active{
+    display:flex;
+  }
+}
+
+/* ページ遷移 */
+.transition{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:9999;
+  pointer-events:none;
+  opacity:1;
+  transition:0.5s;
 }
