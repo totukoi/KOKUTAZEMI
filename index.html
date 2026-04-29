@@ -10,8 +10,11 @@
 
 <body class="top">
 
-<div class="nav">
+<!-- 背景レイヤー -->
+<div class="bg" id="bg"></div>
 
+<!-- ナビ -->
+<div class="nav">
   <a href="./index.html">KOKUTAZEMI</a>
 
   <div class="hamburger" onclick="toggleMenu()">☰</div>
@@ -21,13 +24,22 @@
     <a href="./about/">ABOUT</a>
     <a href="./contact/">CONTACT</a>
   </div>
-
 </div>
 
-<div class="content">
+<!-- セクション -->
+<section class="section" data-bg="img/bg1.jpg">
   <h1>TOP</h1>
-</div>
+</section>
 
+<section class="section" data-bg="img/bg2.jpg">
+  <h1>11</h1>
+</section>
+
+<section class="section" data-bg="img/bg3.jpg">
+  <h1>12</h1>
+</section>
+
+<!-- フェード -->
 <div class="transition" id="transition"></div>
 
 <script src="js/script.js"></script>
