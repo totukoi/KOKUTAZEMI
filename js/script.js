@@ -14,13 +14,13 @@ window.addEventListener("load", () => {
   if(sections.length > 0){
     const first = sections[0].dataset.bg;
     bg.style.backgroundImage = `url(${first})`;
-    current = first; // ← 初期値セット（重要）
+    current = first;
   }
 
   document.getElementById("transition").style.opacity = "0";
 });
 
-/* スクロールで背景変更（中央に一番近いセクション） */
+/* スクロールで背景変更（中央基準） */
 window.addEventListener("scroll", () => {
 
   let closest = null;
@@ -29,7 +29,6 @@ window.addEventListener("scroll", () => {
   sections.forEach(section => {
     const rect = section.getBoundingClientRect();
 
-    // セクションの中心と画面中央の距離
     const center = Math.abs(
       rect.top + rect.height / 2 - window.innerHeight / 2
     );
@@ -51,7 +50,7 @@ window.addEventListener("scroll", () => {
       setTimeout(() => {
         bg.style.backgroundImage = `url(${newBg})`;
         bg.style.opacity = "1";
-      }, 700);
+      }, 700); // ← フェードゆっくり
     }
   }
 });
