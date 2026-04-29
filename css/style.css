@@ -11,7 +11,12 @@ body{
   z-index:-1;
   background-size:cover;
   background-position:center;
-  transition:opacity 0.7s ease;
+  opacity:0;
+  transition:opacity 0.8s ease;
+}
+
+.bg.active{
+  opacity:1;
 }
 
 /* ナビ */
@@ -57,9 +62,12 @@ body{
   justify-content:flex-start;
   align-items:flex-start;
   padding:0 70px;
+
+  /* 🔥 下に余白追加（見切れ防止） */
+  padding-bottom:150px;
 }
 
-/* 🔥 文字（初期は見えない＆下に） */
+/* テキスト */
 .section h1{
   font-size:clamp(32px, 8vw, 80px);
   margin:0;
@@ -71,7 +79,7 @@ body{
   transition:opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* 🔥 表示状態（下からスッと出る） */
+/* 表示状態 */
 .section.active h1{
   opacity:1;
   transform:translateY(0);
@@ -79,8 +87,10 @@ body{
 
 /* スマホ */
 @media (max-width:768px){
+
   .section{
     padding:0 15px;
+    padding-bottom:120px;
   }
 
   .section h1{
@@ -107,7 +117,7 @@ body{
   }
 }
 
-/* フェード */
+/* ページ遷移 */
 .transition{
   position:fixed;
   inset:0;
