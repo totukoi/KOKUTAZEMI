@@ -63,7 +63,8 @@ body{
   min-height:100vh;
   display:flex;
   align-items:center;
-  justify-content:center;
+  justify-content:flex-start; /* ← 左寄せ */
+  padding-left:70px;          /* ← 左に余白 */
   font-size:40px;
 }
 
