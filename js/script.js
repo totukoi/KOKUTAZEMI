@@ -1,3 +1,7 @@
+function toggleMenu(){
+  document.getElementById("menu").classList.toggle("active");
+}
+
 const sections = document.querySelectorAll(".section");
 
 const bg1 = document.getElementById("bg1");
@@ -7,8 +11,8 @@ let currentBg = bg1;
 let nextBg = bg2;
 let current = "";
 
-/* 🔥 初期（これ超重要） */
-window.addEventListener("DOMContentLoaded", () => {
+/* 初期表示（これ重要） */
+document.addEventListener("DOMContentLoaded", () => {
   if(sections.length > 0){
     const firstBg = sections[0].dataset.bg;
 
@@ -18,9 +22,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
     sections[0].classList.add("active");
   }
+
+  document.getElementById("transition").style.opacity = "0";
 });
 
-/* 背景変更 */
+/* 背景切替 */
 function changeBg(url){
   nextBg.style.backgroundImage = `url(${url})`;
   nextBg.classList.add("active");
@@ -63,4 +69,22 @@ window.addEventListener("scroll", () => {
       changeBg(newBg);
     }
   }
+});
+
+/* ページ遷移フェード */
+document.querySelectorAll("a[href]").forEach(link => {
+  link.addEventListener("click", function(e){
+
+    const url = this.getAttribute("href");
+    if(url.startsWith("http")) return;
+
+    e.preventDefault();
+
+    document.getElementById("transition").style.opacity = "1";
+
+    setTimeout(() => {
+      window.location.href = url;
+    }, 400);
+
+  });
 });
