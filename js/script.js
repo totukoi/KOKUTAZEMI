@@ -9,37 +9,51 @@ const bg = document.getElementById("bg");
 
 let current = "";
 
-/* 初期背景 */
+/* 初期背景 + フェードイン */
 window.addEventListener("load", () => {
   if(sections.length > 0){
     const first = sections[0].dataset.bg;
     bg.style.backgroundImage = `url(${first})`;
+    current = first; // ← 初期値セット（重要）
   }
 
-  /* フェードイン */
   document.getElementById("transition").style.opacity = "0";
 });
 
-/* スクロールで背景変更 */
+/* スクロールで背景変更（中央に一番近いセクション） */
 window.addEventListener("scroll", () => {
+
+  let closest = null;
+  let min = Infinity;
+
   sections.forEach(section => {
     const rect = section.getBoundingClientRect();
 
-    if(rect.top < window.innerHeight / 2 && rect.bottom > 0){
-      const newBg = section.dataset.bg;
+    // セクションの中心と画面中央の距離
+    const center = Math.abs(
+      rect.top + rect.height / 2 - window.innerHeight / 2
+    );
 
-      if(current !== newBg){
-        current = newBg;
-
-        bg.style.opacity = "0";
-
-        setTimeout(() => {
-          bg.style.backgroundImage = `url(${newBg})`;
-          bg.style.opacity = "1";
-        }, 300);
-      }
+    if(center < min){
+      min = center;
+      closest = section;
     }
   });
+
+  if(closest){
+    const newBg = closest.dataset.bg;
+
+    if(current !== newBg){
+      current = newBg;
+
+      bg.style.opacity = "0";
+
+      setTimeout(() => {
+        bg.style.backgroundImage = `url(${newBg})`;
+        bg.style.opacity = "1";
+      }, 300);
+    }
+  }
 });
 
 /* ■ ページ遷移アニメ */
