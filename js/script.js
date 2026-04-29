@@ -20,7 +20,7 @@ window.addEventListener("load", () => {
   document.getElementById("transition").style.opacity = "0";
 });
 
-/* スクロール処理 */
+/* ■ スクロール処理 */
 window.addEventListener("scroll", () => {
 
   let closest = null;
@@ -29,7 +29,7 @@ window.addEventListener("scroll", () => {
   sections.forEach(section => {
     const rect = section.getBoundingClientRect();
 
-    /* 背景切り替え判定 */
+    /* 背景切り替え（中央基準） */
     const center = Math.abs(
       rect.top + rect.height / 2 - window.innerHeight / 2
     );
@@ -39,10 +39,10 @@ window.addEventListener("scroll", () => {
       closest = section;
     }
 
-    /* フェードアウト */
+    /* 🔥 フェードアウト（遅く発動） */
     const h1 = section.querySelector("h1");
 
-    if(rect.top < window.innerHeight * 0.2){
+    if(rect.bottom < window.innerHeight * 0.3){
       h1.classList.add("fade-out");
     }else{
       h1.classList.remove("fade-out");
