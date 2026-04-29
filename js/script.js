@@ -51,7 +51,7 @@ window.addEventListener("scroll", () => {
       setTimeout(() => {
         bg.style.backgroundImage = `url(${newBg})`;
         bg.style.opacity = "1";
-      }, 300);
+      }, 700);
     }
   }
 });
