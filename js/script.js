@@ -3,7 +3,7 @@ function toggleMenu(){
   document.getElementById("menu").classList.toggle("active");
 }
 
-/* ■ 背景切り替え（Apple風） */
+/* ■ 背景切り替え */
 const sections = document.querySelectorAll(".section");
 const bg = document.getElementById("bg");
 
