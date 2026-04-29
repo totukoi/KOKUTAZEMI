@@ -11,7 +11,7 @@ let currentBg = bg1;
 let nextBg = bg2;
 let current = "";
 
-/* 初期表示（これ重要） */
+/* 初期 */
 document.addEventListener("DOMContentLoaded", () => {
   if(sections.length > 0){
     const firstBg = sections[0].dataset.bg;
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("transition").style.opacity = "0";
 });
 
-/* 背景切替 */
+/* 背景変更 */
 function changeBg(url){
   nextBg.style.backgroundImage = `url(${url})`;
   nextBg.classList.add("active");
@@ -69,22 +69,4 @@ window.addEventListener("scroll", () => {
       changeBg(newBg);
     }
   }
-});
-
-/* ページ遷移フェード */
-document.querySelectorAll("a[href]").forEach(link => {
-  link.addEventListener("click", function(e){
-
-    const url = this.getAttribute("href");
-    if(url.startsWith("http")) return;
-
-    e.preventDefault();
-
-    document.getElementById("transition").style.opacity = "1";
-
-    setTimeout(() => {
-      window.location.href = url;
-    }, 400);
-
-  });
 });
