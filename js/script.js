@@ -1,26 +1,29 @@
-/* ■ メニュー開閉 */
+/* メニュー */
 function toggleMenu(){
   document.getElementById("menu").classList.toggle("active");
 }
 
-/* ■ 背景切り替え */
 const sections = document.querySelectorAll(".section");
 const bg = document.getElementById("bg");
 
 let current = "";
 
-/* 初期背景 + フェードイン */
+/* 初期 */
 window.addEventListener("load", () => {
   if(sections.length > 0){
-    const first = sections[0].dataset.bg;
-    bg.style.backgroundImage = `url(${first})`;
-    current = first;
+    const first = sections[0];
+    const firstBg = first.dataset.bg;
+
+    bg.style.backgroundImage = `url(${firstBg})`;
+    current = firstBg;
+
+    first.classList.add("active"); // 最初の文字表示
   }
 
   document.getElementById("transition").style.opacity = "0";
 });
 
-/* ■ スクロール処理 */
+/* スクロール */
 window.addEventListener("scroll", () => {
 
   let closest = null;
@@ -29,7 +32,6 @@ window.addEventListener("scroll", () => {
   sections.forEach(section => {
     const rect = section.getBoundingClientRect();
 
-    /* 背景切り替え（中央基準） */
     const center = Math.abs(
       rect.top + rect.height / 2 - window.innerHeight / 2
     );
@@ -38,19 +40,16 @@ window.addEventListener("scroll", () => {
       min = center;
       closest = section;
     }
-
-    /* 🔥 フェードアウト（遅く発動） */
-    const h1 = section.querySelector("h1");
-
-    if(rect.bottom < window.innerHeight * 0.3){
-      h1.classList.add("fade-out");
-    }else{
-      h1.classList.remove("fade-out");
-    }
   });
 
-  /* 背景変更 */
+  /* active切り替え（文字表示制御） */
+  sections.forEach(section => {
+    section.classList.remove("active");
+  });
+
   if(closest){
+    closest.classList.add("active");
+
     const newBg = closest.dataset.bg;
 
     if(current !== newBg){
@@ -66,20 +65,17 @@ window.addEventListener("scroll", () => {
   }
 });
 
-/* ■ ページ遷移アニメ */
+/* ページ遷移 */
 document.querySelectorAll("a[href]").forEach(link => {
   link.addEventListener("click", function(e){
-
     const url = this.getAttribute("href");
     if(url.startsWith("http")) return;
 
     e.preventDefault();
-
     document.getElementById("transition").style.opacity = "1";
 
     setTimeout(() => {
       window.location.href = url;
     }, 400);
-
   });
 });
