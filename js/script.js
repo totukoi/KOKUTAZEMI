@@ -1,7 +1,3 @@
-function toggleMenu(){
-  document.getElementById("menu").classList.toggle("active");
-}
-
 const sections = document.querySelectorAll(".section");
 
 const bg1 = document.getElementById("bg1");
@@ -11,18 +7,17 @@ let currentBg = bg1;
 let nextBg = bg2;
 let current = "";
 
-/* 初期 */
-window.addEventListener("load", () => {
-  const first = sections[0];
-  const firstBg = first.dataset.bg;
+/* 🔥 初期（これ超重要） */
+window.addEventListener("DOMContentLoaded", () => {
+  if(sections.length > 0){
+    const firstBg = sections[0].dataset.bg;
 
-  currentBg.style.backgroundImage = `url(${firstBg})`;
-  currentBg.classList.add("active");
-  current = firstBg;
+    bg1.style.backgroundImage = `url(${firstBg})`;
+    bg1.classList.add("active");
+    current = firstBg;
 
-  first.classList.add("active");
-
-  document.getElementById("transition").style.opacity = "0";
+    sections[0].classList.add("active");
+  }
 });
 
 /* 背景変更 */
@@ -32,9 +27,7 @@ function changeBg(url){
 
   currentBg.classList.remove("active");
 
-  let temp = currentBg;
-  currentBg = nextBg;
-  nextBg = temp;
+  [currentBg, nextBg] = [nextBg, currentBg];
 }
 
 /* スクロール */
@@ -56,7 +49,6 @@ window.addEventListener("scroll", () => {
     }
   });
 
-  /* 文字制御 */
   sections.forEach(section => {
     section.classList.remove("active");
   });
@@ -71,20 +63,4 @@ window.addEventListener("scroll", () => {
       changeBg(newBg);
     }
   }
-});
-
-/* ページ遷移 */
-document.querySelectorAll("a[href]").forEach(link => {
-  link.addEventListener("click", function(e){
-    const url = this.getAttribute("href");
-    if(url.startsWith("http")) return;
-
-    e.preventDefault();
-
-    document.getElementById("transition").style.opacity = "1";
-
-    setTimeout(() => {
-      window.location.href = url;
-    }, 400);
-  });
 });
