@@ -50,7 +50,7 @@ window.addEventListener("scroll", () => {
       setTimeout(() => {
         bg.style.backgroundImage = `url(${newBg})`;
         bg.style.opacity = "1";
-      }, 700); // ← フェードゆっくり
+      }, 400); 
     }
   }
 });
