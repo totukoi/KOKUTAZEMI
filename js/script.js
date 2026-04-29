@@ -20,7 +20,7 @@ window.addEventListener("load", () => {
   document.getElementById("transition").style.opacity = "0";
 });
 
-/* スクロールで背景変更（中央基準） */
+/* スクロール処理 */
 window.addEventListener("scroll", () => {
 
   let closest = null;
@@ -29,6 +29,7 @@ window.addEventListener("scroll", () => {
   sections.forEach(section => {
     const rect = section.getBoundingClientRect();
 
+    /* 背景切り替え判定 */
     const center = Math.abs(
       rect.top + rect.height / 2 - window.innerHeight / 2
     );
@@ -37,8 +38,18 @@ window.addEventListener("scroll", () => {
       min = center;
       closest = section;
     }
+
+    /* フェードアウト */
+    const h1 = section.querySelector("h1");
+
+    if(rect.top < window.innerHeight * 0.2){
+      h1.classList.add("fade-out");
+    }else{
+      h1.classList.remove("fade-out");
+    }
   });
 
+  /* 背景変更 */
   if(closest){
     const newBg = closest.dataset.bg;
 
@@ -50,7 +61,7 @@ window.addEventListener("scroll", () => {
       setTimeout(() => {
         bg.style.backgroundImage = `url(${newBg})`;
         bg.style.opacity = "1";
-      }, 400); 
+      }, 400);
     }
   }
 });
