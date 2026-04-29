@@ -58,19 +58,26 @@ body{
   cursor:pointer;
 }
 
-/* ■ セクション（左寄せ） */
+/* ■ セクション（←これが抜けてた） */
+.section{
+  min-height:100vh;
+  display:flex;
+  justify-content:flex-start; /* 横は左 */
+  align-items:flex-start;     /* 上寄せ */
+  padding:0 70px;
+}
+
+/* ■ テキスト（統合） */
 .section h1{
   font-size:clamp(32px, 8vw, 80px);
   font-weight:700;
   letter-spacing:2px;
   line-height:1.2;
-}
-
-/* テキストも左固定 */
-.section h1{
   text-align:left;
   margin:0;
   max-width:600px;
+
+  margin-top:33vh; /* ← 2/3上に配置 */
 }
 
 /* ■ スマホ */
@@ -78,7 +85,11 @@ body{
 
   .section{
     padding:0 15px;
+  }
+
+  .section h1{
     font-size:28px;
+    margin-top:25vh; /* スマホは少し上に */
   }
 
   .hamburger{
