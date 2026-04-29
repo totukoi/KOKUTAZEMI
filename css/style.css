@@ -2,6 +2,7 @@ body{
   margin:0;
   font-family:sans-serif;
   color:#fff;
+  overflow-x:hidden; /* ←横はみ出し防止 */
 }
 
 /* 背景 */
@@ -15,44 +16,9 @@ body{
   transition:opacity 0.8s ease;
 }
 
+/* 表示中 */
 .bg.active{
   opacity:1;
-}
-
-/* ナビ */
-.nav{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 20px;
-  z-index:10000;
-  background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(6px);
-}
-
-.nav > a{
-  font-size:28px;
-  font-weight:700;
-  letter-spacing:2px;
-  text-decoration:none;
-  color:inherit;
-}
-
-/* メニュー */
-.menu{
-  display:flex;
-  gap:20px;
-}
-
-/* ハンバーガー */
-.hamburger{
-  display:none;
-  font-size:26px;
-  cursor:pointer;
 }
 
 /* セクション */
@@ -61,10 +27,9 @@ body{
   display:flex;
   justify-content:flex-start;
   align-items:flex-start;
-  padding:0 70px;
 
-  /* 🔥 下に余白追加（見切れ防止） */
-  padding-bottom:150px;
+  padding:0 70px;
+  box-sizing:border-box; /* ←重要 */
 }
 
 /* テキスト */
@@ -72,58 +37,17 @@ body{
   font-size:clamp(32px, 8vw, 80px);
   margin:0;
   margin-top:15vh;
-  max-width:600px;
+
+  max-width:100%; /* ←修正 */
+  word-break:break-word; /* ←追加 */
 
   opacity:0;
   transform:translateY(60px);
-  transition:opacity 0.8s ease, transform 0.8s ease;
+  transition:0.8s;
 }
 
-/* 表示状態 */
+/* 表示 */
 .section.active h1{
   opacity:1;
   transform:translateY(0);
-}
-
-/* スマホ */
-@media (max-width:768px){
-
-  .section{
-    padding:0 15px;
-    padding-bottom:120px;
-  }
-
-  .section h1{
-    margin-top:18vh;
-    font-size:28px;
-  }
-
-  .hamburger{
-    display:block;
-  }
-
-  .menu{
-    display:none;
-    flex-direction:column;
-    position:absolute;
-    top:60px;
-    right:20px;
-    background:#000;
-    padding:10px;
-  }
-
-  .menu.active{
-    display:flex;
-  }
-}
-
-/* ページ遷移 */
-.transition{
-  position:fixed;
-  inset:0;
-  background:#000;
-  z-index:9999;
-  pointer-events:none;
-  opacity:1;
-  transition:0.5s;
 }
