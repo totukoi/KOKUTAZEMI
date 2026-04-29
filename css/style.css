@@ -58,16 +58,16 @@ body{
   cursor:pointer;
 }
 
-/* ■ セクション（←これが抜けてた） */
+/* ■ セクション */
 .section{
   min-height:100vh;
   display:flex;
-  justify-content:flex-start; /* 横は左 */
-  align-items:flex-start;     /* 上寄せ */
+  justify-content:flex-start;
+  align-items:flex-start;
   padding:0 70px;
 }
 
-/* ■ テキスト（統合） */
+/* ■ テキスト */
 .section h1{
   font-size:clamp(32px, 8vw, 80px);
   font-weight:700;
@@ -77,7 +77,17 @@ body{
   margin:0;
   max-width:600px;
 
-  margin-top:33vh; /* ← 2/3上に配置 */
+  margin-top:15vh; /* ← さらに上 */
+  
+  opacity:1;
+  transform:translateY(0);
+  transition:opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* フェードアウト */
+.section h1.fade-out{
+  opacity:0;
+  transform:translateY(-30px);
 }
 
 /* ■ スマホ */
@@ -89,7 +99,7 @@ body{
 
   .section h1{
     font-size:28px;
-    margin-top:25vh; /* スマホは少し上に */
+    margin-top:18vh;
   }
 
   .hamburger{
