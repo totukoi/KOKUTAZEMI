@@ -4,7 +4,7 @@ body{
   color:#fff;
 }
 
-/* ■ 背景（メイン） */
+/* ■ 背景 */
 .bg{
   position:fixed;
   inset:0;
@@ -58,24 +58,33 @@ body{
   cursor:pointer;
 }
 
-/* ■ セクション */
+/* ■ セクション（左寄せ） */
 .section{
   min-height:100vh;
   display:flex;
   align-items:center;
-  justify-content:flex-start; /* ←ここ重要 */
+  justify-content:flex-start;
   padding:0 70px;
+}
+
+/* テキストも左固定 */
+.section h1{
+  text-align:left;
+  margin:0;
+  max-width:600px;
 }
 
 /* ■ スマホ */
 @media (max-width:768px){
+
   .section{
-    padding-left:15px;
+    padding:0 15px;
     font-size:28px;
   }
-}
 
-  .hamburger{display:block;}
+  .hamburger{
+    display:block;
+  }
 
   .menu{
     display:none;
@@ -88,10 +97,12 @@ body{
     border-radius:8px;
   }
 
-  .menu.active{display:flex;}
+  .menu.active{
+    display:flex;
+  }
 }
 
-/* ■ フェード（ページ遷移） */
+/* ■ ページ遷移フェード */
 .transition{
   position:fixed;
   inset:0;
